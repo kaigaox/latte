@@ -315,7 +315,7 @@ contains
         real, allocatable, dimension(:, :) :: sx, sz, st0
         real, allocatable, dimension(:, :) :: sxr, szr
         integer :: i, ic
-        type(hdbscan_param) :: p
+        type(hdbscan) :: p
         integer, allocatable, dimension(:) :: unindex, sindex
         integer :: nc
         real, allocatable, dimension(:) :: pr1, pr2
@@ -365,14 +365,12 @@ contains
                     case('clustering-fit')
 
                         ! Clustering
-                        p%n = nr_virtual
                         p%data = zeros(nr_virtual, 2)
                         p%data(:, 1) = szr(:, 1) - oz
                         p%data(:, 2) = sxr(:, 1) - ox
-                        p%nd = 2
-                        call readpar_xint(file_parameter, 'clustering_fit_min_sample', p%min_sample, nint(0.25*nr_virtual), iter*1.0)
-                        call readpar_xint(file_parameter, 'clustering_fit_min_cluster_size', p%min_cluster_size, p%min_sample, iter*1.0)
-                        call hdbscan(p)
+                        call readpar_xint(file_parameter, 'clustering_fit_min_sample', p%min_samples, nint(0.25*nr_virtual), iter*1.0)
+                        call readpar_xint(file_parameter, 'clustering_fit_min_cluster_size', p%min_cluster_size, p%min_samples, iter*1.0)
+                        call p%cluster
 
                         ! Find unique labels
                         unindex = sort(unique(p%labels))
@@ -390,7 +388,7 @@ contains
                         do ic = 2, nc
 
                             ! Select points associated with label_i
-                            sindex = pack(regspace(1, 1, p%n), mask=(p%labels==unindex(ic)))
+                            sindex = pack(regspace(1, 1, p%n_points), mask=(p%labels==unindex(ic)))
 
                             ! Fit the curve
                             call fit_curve(p%data(sindex, 1), p%data(sindex, 2), pr1, pr2, method=fit_method, smooth=fit_smooth, order=fit_order)

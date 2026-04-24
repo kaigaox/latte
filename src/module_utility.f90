@@ -162,7 +162,7 @@ contains
             close (33)
 
             open (33, file=tidy(file_shotmisfit), status='old', access='stream', form='unformatted')
-            do i = 1, resume_from_iter - 1
+            do i = 0, resume_from_iter - 1
                 read (33) shot_misfit(:, i)
             end do
             close (33)
@@ -229,10 +229,13 @@ contains
 
         if (iter >= 3) then
             if (data_misfit(iter) == data_misfit(iter - 1) .and. data_misfit(iter - 1) == data_misfit(iter - 2)) then
+
                 ! Reduce maximum step size scaling factor
                 step_max_scale_factor = step_max_scale_factor/2.0
-                ! Or just stop the inversion
+
                 if (yn_flat_stop) then
+                    ! If flat-stop is required, then stop
+
                     if (rankid == 0) then
                         call warn(' ')
                         call warn(date_time_compact()//' The inversion has three successive iterations with identical data misfits. ')
@@ -241,7 +244,21 @@ contains
                     end if
                     call mpibarrier
                     call mpiend
+
+                else
+
+                    ! Otherwise, when the program arrives here, it means the inversion cannot perform effective misfit reduction
+                    ! anymore. Most likely, it is in some local minimum and cannot find an effective gradient.
+                    ! In this case, in the next iteration, we allow some relaxation for misfits.
+                    trigger_jumpout = .true.
+
+                    if (rankid == 0) then
+                        call warn(date_time_compact()//' Misfit relaxation is enabled. ')
+                        call warn(date_time_compact()//' From next iteration on, misfit may increase. ')
+                    end if
+
                 end if
+
             end if
         end if
 

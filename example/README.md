@@ -11,6 +11,7 @@ The directory contains scripts for building and running several validation examp
 - `tloc`: An example for validating 2D joint FATT and source location functionality of `LATTE`. The results are shown in Figures 10-21 of [the LATTE paper](https://doi.org/10.1093/gji/ggaf079). 
 - `tloc_fault`: An example for validating 3D joint FATT and source location functionality of `LATTE`, as well as ML-enhanced source location associated with faults. The results are shown in Figures 26-36 of [the LATTE paper](https://doi.org/10.1093/gji/ggaf079). 
 - `tloc_fracture`: An example for validating 2D source location functionlity of `LATTE`, as well as ML-enhanced source location associated with faults. The results are shown in Figures 22-25 of [the LATTE paper](https://doi.org/10.1093/gji/ggaf079). 
+- `topo_2d`: An example for validating 2D eikonal equation solving and FATT of `LATTE` for a model with topographic top surface; this is done by masking the region above the topography. 
 - `yilmaz_near_surface`: An example field dataset (the data only contains picked first-arrival traveltime, not original seismic waveform data and a 1D gradient model is created as the initial Vp model) associated with [this paper (Yilmaz et al., 2022)](
 https://doi.org/10.1190/tle41010040.1).
 

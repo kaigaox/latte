@@ -37,39 +37,35 @@ Algorithm features (details are explained in [the LATTE paper](https://academic.
 - Medium anisotropy.
 - GPU-based acceleration. 
 
-The work is supported by Los Alamos National Laboratory (LANL) Laboratory Directory Research and Development (LDRD) project 20240322ER. LANL is operated by Triad National Security, LLC, for the National Nuclear Security Administration (NNSA) of the U.S. Department of Energy (DOE) under Contract No. 89233218CNA000001. The research uses high-performance computing resources provided by LANL's Institutional Computing (IC) program. The work is approved for public release under LA-UR-24-27806. 
+The work is supported by Los Alamos National Laboratory (LANL) Laboratory Directory Research and Development (LDRD) project 20240322ER. LANL is operated by Triad National Security, LLC, for the National Nuclear Security Administration (NNSA) of the U.S. Department of Energy (DOE) under Contract No. 89233218CNA000001. The research uses high-performance computing resources provided by LANL's Institutional Computing (IC) program. The paper associated with the work is approved for public release under LA-UR-24-27806. 
 
 The codes are released under LANL open source approval reference O4770.
 
 # Requirement
-`LATTE` depends on [FLIT](https://github.com/lanl/flit). Some examples in [example](example) use [RGM](https://github.com/lanl/rgm) to generate random geological models. 
-
-The code is written in Fortran + MPI. Currently, it can only be compiled with Intel's compiler suite [Intel oneAPI HPC Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/hpc-toolkit.html).
+ - Platform: Linux
+ - Compiler: [Intel's oneAPI HPC Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/hpc-toolkit-download.html)
+ - [FLIT](https://github.com/lanl/flit)
+ - Some examples in [example](example) requires [RGM](https://github.com/lanl/rgm) for model generation and [pymplot](https://github.com/lanl/pymplot) for visualization. 
 
 # Use
-To install `LATTE`, 
-
+To install `LATTE`:
 ```
 cd src
 ruby install.rb
 ```
-
 The compiled `LATTE` executables will be at `bin`.
 
-To remake, 
-
+To remake: 
 ```
 cd src
 ruby install.rb clean
 ```
 
-We include several simple examples to use `LATTE` in [example](example). To run the tests, 
-
+To run [example](example):
 ```
 cd test
 ```
-
-and the scripts to reproduce the examples in the mansucript are contained in subfolders. 
+and the scripts to reproduce the examples in the paper are contained in the subfolders. 
 
 # License
 &copy; 2024-2026. Triad National Security, LLC. All rights reserved. 
@@ -92,7 +88,6 @@ Kai Gao, <kaigao@lanl.gov>
 We welcome feedback, bug reports, and suggestions for improving `LATTE`. 
 
 If you use this package in your research and find it useful, please cite it as
-
 * Kai Gao, 2024, LATTE: Los Alamos TravelTime package based on Eikonal equation, GitHub Repository, url: [github.com/lanl/latte_traveltime](https://github.com/lanl/latte_traveltime)
 * Kai Gao, Ting Chen, 2025, LATTE: open-source, high-performance traveltime computation, tomography and source location in acoustic and elastic media, Geophysical Journal International, doi: [10.1093/gji/ggaf079](https://academic.oup.com/gji/article/241/2/1275/8046728). 
 

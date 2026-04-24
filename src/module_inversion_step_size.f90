@@ -598,7 +598,7 @@ contains
 
         end if
 
-        ! print perturbation infomation
+        ! Print perturbation infomation
         call print_perturb_info
 
         ! Current absolute data misfit
@@ -612,7 +612,7 @@ contains
             call warn(date_time_compact()//' >>>>>>>>>> Step size computation completed.')
         end if
 
-        ! update model and output updated model for current iteration
+        ! Update model and output updated model for current iteration
         call update_model(step_scaling_factor)
         if (rankid == 0) then
             call output_updated_model
@@ -630,7 +630,6 @@ contains
         integer :: cnt
         real :: al, ar, ac, fl, fr, fc, a0
         real :: acr, arl, alc, bcr, brl, blc, num, den, an, fn, a2, f2
-        !        real :: step0,
         real :: misfit0, step1, misfit1, step2, misfit2
         character(len=1024) :: dir_from, dir_to
 
@@ -950,7 +949,12 @@ contains
     subroutine compute_step_size
 
         ! Define a relaxation factor that allows later-iteration misfit > current iteration
-        call readpar_xfloat(file_parameter, 'jumpout_factor', jumpout_factor, 1.0, 1.0*iter)
+        if (trigger_jumpout) then
+            ! When there are three same misfits, jump out by default
+            call readpar_xfloat(file_parameter, 'jumpout_factor', jumpout_factor, 1.05, 1.0*iter)
+        else
+            call readpar_xfloat(file_parameter, 'jumpout_factor', jumpout_factor, 1.0, 1.0*iter)
+        end if
 
         select case (step_size_method)
             case ('linear')

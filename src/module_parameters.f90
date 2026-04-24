@@ -158,6 +158,7 @@ module parameters
     character(len=1024) :: file_datamisfit, file_shotmisfit
     logical :: yn_continue_inv = .false.
     logical :: yn_enforce_update = .false.
+    logical :: trigger_jumpout = .false.
     logical :: put_synthetic_in_scratch = .false.
 
     character(len=32), allocatable, dimension(:) :: record_processing
@@ -296,7 +297,7 @@ contains
         end select
         call mpibarrier
 
-        call bcast_array(file_parameter)
+        call bcast(file_parameter)
 
         ! which kind of medium
         call readpar_string(file_parameter, 'which_medium', which_medium, 'acoustic-iso')
