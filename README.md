@@ -37,7 +37,7 @@ Algorithm features (details are explained in [the LATTE paper](https://academic.
 - Medium anisotropy.
 - GPU-based acceleration. 
 
-The work is supported by Los Alamos National Laboratory (LANL) Laboratory Directory Research and Development (LDRD) project 20240322ER. LANL is operated by Triad National Security, LLC, for the National Nuclear Security Administration (NNSA) of the U.S. Department of Energy (DOE) under Contract No. 89233218CNA000001. The research uses high-performance computing resources provided by LANL's Institutional Computing (IC) program. The paper associated with the work is approved for public release under LA-UR-24-27806. 
+The work is supported by Los Alamos National Laboratory (LANL) Laboratory Directed Research and Development (LDRD) project 20240322ER. LANL is operated by Triad National Security, LLC, for the National Nuclear Security Administration (NNSA) of the U.S. Department of Energy (DOE) under Contract No. 89233218CNA000001. The research uses high-performance computing resources provided by LANL's Institutional Computing (IC) program. The paper associated with the work is approved for public release under LA-UR-24-27806. 
 
 The codes are released under LANL open source approval reference O4770.
 
